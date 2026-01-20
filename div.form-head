@@ -1,0 +1,39 @@
+d.innerHTML=`
+  <h3 style="text-align:center;margin-bottom:15px">${judul}</h3>
+  <div class="form-head">
+    <div class="field">
+      <label>Kode</label>
+      <input class="kode" value="${kode}" readonly>
+    </div>
+    <div class="field">
+      <label>No Urut</label>
+      <input class="urut" value="${String(savedNumber).padStart(2,'0')}">
+    </div>
+    <div class="field">
+      <label>Tahun</label>
+      <input class="tahun" value="${new Date().getFullYear()}">
+    </div>
+  </div>
+
+  <form onsubmit="simpan(event,'${id}')" style="display:flex;flex-wrap:wrap;gap:10px;">
+    ${kolom.map(k=>k==='Tanggal'?'<input type="date" required style="flex:1 1 150px">':`<input placeholder="${k}" required style="flex:1 1 150px">`).join('')}
+    <button style="flex:1 1 100px">Simpan</button>
+  </form>
+
+  <div class="export">
+    <button onclick="exportExcel('${id}')">Excel</button>
+    <button onclick="exportWord('${id}')">Word</button>
+    <button onclick="exportPDF('${id}')">PDF</button>
+    <button onclick="window.print()">Print</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table id="${id}Table">
+      <tr>
+        <th>No</th><th>No Surat</th>
+        ${kolom.map(k=>`<th>${k}</th>`).join('')}
+        <th class="no-export">Aksi</th>
+      </tr>
+    </table>
+  </div>
+`;
